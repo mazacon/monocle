@@ -15,8 +15,11 @@ class RssFeedController extends Controller
      */
     public function index()
     {
+        // grab current user id from auth shortcut
+        $current_user_id = auth()->user()->id;
+
         return Inertia::render('RssFeeds/Index', [
-            //
+            'rssfeeds' => RssFeed::where('user_id', $current_user_id)->get(),
         ]);
     }
 
