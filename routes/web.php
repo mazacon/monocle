@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RssFeedController;
+use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,10 @@ Route::get('/', function () {
 
 Route::resource('rss-feeds', RssFeedController::class)
     ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('reader', ReaderController::class)
+    ->only(['show'])
     ->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
